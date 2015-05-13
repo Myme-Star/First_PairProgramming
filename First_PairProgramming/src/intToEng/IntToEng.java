@@ -16,23 +16,30 @@ public class IntToEng {
 
     // 数値を英訳する変換するメソッド
     static String translateEng(int n) {
-		String v[] = {"", "", "twenty", "thirty", "forty", "fifty", "sixty",
+		String 十の位[] = {"", "", "twenty", "thirty", "forty", "fifty", "sixty",
 				"seventy", "eighty", "ninety"};
-    	String u[] = {
+    	String 一の位[] = {
     			"zero", "one", "two", "three", "four", "five",
-    			"six", "seven", "eight", "nine", "ten", 
+    			"six", "seven", "eight", "nine"}; 
+    	String 十から十九[] ={"ten", 
     			"eleven", "twelve", "thirteen", "fourteen", "fifteen", 
-    			"sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
-    	if(n<=20){
-    		return u[n];
-    	}else if(n<100){
-    		int i = n/10;
-    		int k = n%10;
-    		String ans = v[i];
-    		if(k!=0) ans += u[k];
-    		return ans;
-    	}else{
+    			"sixteen", "seventeen", "eighteen", "nineteen"};
+    	
+    	String ans ="";
+    	if(n==100){
     		return "one hundred";
     	}
+    	if(n>=20){
+    		ans += 十の位[n/10];
+    		n = n%10;
+    	}
+    	if(n>=10){
+    		return 十から十九[n%10];
+    	}
+    	if(n>=0){
+    		if(ans.length()>0 && n == 0);	
+    		else ans += 一の位[n];
+    	}
+    	return ans;
     }
 }
