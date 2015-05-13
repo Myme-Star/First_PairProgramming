@@ -25,20 +25,35 @@ public class IntToEng {
     			"eleven", "twelve", "thirteen", "fourteen", "fifteen", 
     			"sixteen", "seventeen", "eighteen", "nineteen"};
     	
+    	boolean flag = false;
     	String ans ="";
-    	if(n==100){
-    		return "one hundred";
+    	if(n>=1000){
+    		if(n/1000 >= 2)
+    			ans += 一の位[n/1000];
+    		ans += " thousand ";
+    		n %= 1000;
+    		flag = true;
+    	}
+    	if(n>=100){
+    		ans += 一の位[n/100]+" hundred ";
+    		n %= 100;
+    		flag = false;
     	}
     	if(n>=20){
     		ans += 十の位[n/10];
     		n = n%10;
+    		flag = true;
     	}
     	if(n>=10){
-    		return 十から十九[n%10];
+    		return ans + 十から十九[n%10];
     	}
     	if(n>=0){
-    		if(ans.length()>0 && n == 0);	
-    		else ans += 一の位[n];
+    		if(ans.length()>0 && n == 0)
+    			return ans;
+    		if(!flag && ans.length()>0){
+    			ans += " and ";
+    		}
+    		ans += 一の位[n];
     	}
     	return ans;
     }
